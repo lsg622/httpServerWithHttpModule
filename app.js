@@ -43,7 +43,7 @@ const httpRequestListener = function (request, response) {
     }
   } else if (method === "POST") {
     // (3)
-    if (url === "/posts") {
+    if (url === "/users") {
       let body = ""; // (4)
 
       request.on("data", (data) => {
@@ -63,7 +63,7 @@ const httpRequestListener = function (request, response) {
           password: user.password,
         });
 
-        response.end(JSON.stringify({ message: "postCreated" })); // (9)
+        response.end(JSON.stringify({ message: "userCreated" })); // (9)
       });
     }
   }
