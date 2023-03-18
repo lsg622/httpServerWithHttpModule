@@ -65,6 +65,29 @@ const httpRequestListener = function (request, response) {
 
         response.end(JSON.stringify({ message: "userCreated" })); // (9)
       });
+      // console.log();
+    } else if (url === "/posts") {
+      let body = ""; // (4)
+
+      request.on("data", (data) => {
+        body += data;
+      }); // (5)
+
+      // stream을 전부 받아온 이후에 실행
+      request.on("end", () => {
+        // (6)
+        const post = JSON.parse(body); //(7)
+
+        posts.push({
+          // (8)
+          id: post.id,
+          title: post.title,
+          description: post.description,
+          userId: post.userId,
+        });
+
+        response.end(JSON.stringify({ message: "postCreated" })); // (9)
+      });
     }
   }
 };
